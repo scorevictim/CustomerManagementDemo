@@ -122,16 +122,39 @@ public class CustomerView {
 
         Customer newCust = new Customer(name, gender, age, phone, email);
 
-        boolean isReplaced =  this.customerList.replaceCustomer(id - 1, newCust);
-        if(isReplaced){
+        boolean isReplaced = this.customerList.replaceCustomer(id - 1, newCust);
+        if (isReplaced) {
             System.out.println("-------------------------Successful!-----------------------");
-        }else{
+        } else {
             System.out.println("--------------------------Failed-----------------------------");
         }
     }
 
     private void deleteCustomer() {
-        System.out.println("Deleting");
+        System.out.println("------------------------Delete Customer-------------------");
+
+        int number;
+
+        for (;;) {
+            System.out.println("Please choose customer id to delete(-1 for exit):");
+            number = CMUtility.readInt();
+            if (number == -1) {
+                return;
+            }
+
+            Customer customer = this.customerList.getCustomer(number - 1);
+            if (customer == null) {
+                System.out.println("Didn't find customer");
+            } else {
+                break;
+            }
+        }
+        System.out.println("Are you sure?(Y/N)");
+        char isDelete = CMUtility.readConfirmSelection();
+        if (isDelete == 'Y') {
+            this.customerList.deleteCustomer(number - 1);
+        }
+
     }
 
     private void listAllCustomers() {
