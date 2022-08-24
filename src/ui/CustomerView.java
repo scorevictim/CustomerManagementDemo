@@ -122,7 +122,12 @@ public class CustomerView {
 
         Customer newCust = new Customer(name, gender, age, phone, email);
 
-        this.customerList.replaceCustomer(id - 1, newCust);
+        boolean isReplaced =  this.customerList.replaceCustomer(id - 1, newCust);
+        if(isReplaced){
+            System.out.println("-------------------------Successful!-----------------------");
+        }else{
+            System.out.println("--------------------------Failed-----------------------------");
+        }
     }
 
     private void deleteCustomer() {
